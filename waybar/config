@@ -1,0 +1,175 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 45,
+  "spacing": 10,
+
+
+  "modules-left": [
+    "custom/space",
+    "custom/launcher",
+    "clock",
+    "custom/workspace"
+  ],
+  "modules-center": [
+    "custom/spotify"
+  ],
+  "modules-right": [
+    "custom/monitor",
+    "pulseaudio",
+    "network",
+    "battery",
+    "custom/power",
+    "custom/space"
+  ],
+
+
+  "custom/power": {
+    "format": " {}",
+    "rotate": 0,
+    "on-click": "~/.config/hypr/scripts/logoutlaunch.sh 2",
+    "interval" : 86400,
+    "tooltip": false
+  },
+
+  "custom/monitor": {
+    "interval": 1,
+    "exec": "python /home/ernst/.config/waybar/modules/monitor.py",
+    "return-type": "json",
+    // "format": "{memory}% Mem, {cpu}% CPU"
+    // "format": "{cpu} - {memory}"
+    "format": "{}"
+  },
+
+  "custom/spotify": {
+    "exec": "python /home/ernst/.config/waybar/modules/mediaplayer.py --player spotify",
+    "format": "{icon}   {}",
+    "return-type": "json",
+    "on-click": "playerctl play-pause --player spotify",
+    "on-click-right": "playerctl next --player spotify",
+    "on-click-middle": "playerctl previous --player spotify",
+    "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -p spotify i",
+    "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -p spotify d",
+    "max-length": 70,
+    "escape": true,
+    "tooltip": false,
+    "format-icons": "<span font='15' foreground=\"#1ED760\"></span>"
+  },
+
+  "custom/launcher": {
+    "format": "󰣇",
+    "on-click": "sh /home/ernst/.config/rofi/launchers/type-0/launcher.sh",
+    "tooltip-format": "sudo pacman -Q linux",
+    "tooltip": true
+  },
+
+  "clock": {
+    "timezone": "America/Sao_Paulo",
+    "format": "{:%B %d  %I:%M %p}",
+    "min-length": 17
+  },
+
+  "tray": {
+    "icon-size": 15,
+    "spacing": 20
+  },
+
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "tooltip": false
+  },
+
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+
+  "battery": {
+    "states": {
+      "good": 100,
+      "warning": 50,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon} ",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-full": "",
+    "format-good": "",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip": false
+  },
+
+  "network": {
+    // "format-wifi": "{essid} ({signalStrength}%) {icon} ",
+    "format-wifi": "{essid}  {icon} ",
+    "format-icons": {
+      "default": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+      ]
+    },
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "⚠",
+    "tooltip": false
+  },
+
+  "pulseaudio": {
+    "max-volume": 150,
+    "scroll-step": 5,
+    "format": "{volume} {icon} ",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "custom/space": {
+    "format": " "
+  }
+}
